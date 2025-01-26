@@ -19,6 +19,23 @@ Este es un sistema de gestión de inventario desarrollado en Python, utilizando 
 - **Biblioteca mysql-connector-python** (para interactuar con MySQL)
 - **Tkinter** (incluida con Python)
 
+## Pasos para ejecutar el proyecto:
+
+1. **Clona este repositorio**:
+   git clone https://github.com/maveggia/inventario-python-con-interfaz.git
+
+2. **Instala las dependencias necesarias**: puedes instalar la biblioteca MySQL directamente ejecutando:
+   pip install mysql-connector-python
+
+3. **Configura la base de datos MySQL**: crea la base de datos "inventario" en MySQL ejecutando el siguiente comando:
+   CREATE DATABASE inventario;
+
+4. **Ejecuta el archivo SQL para crear la tabla y agregar productos**: en la carpeta `scripts/`, encontrarás el archivo `inventario.sql`, que contiene la estructura de la base de datos y algunos productos iniciales. Ejecútalo en MySQL para configurarlo:
+   mysql -u root -p inventario < scripts/inventario.sql
+
+5. **Ejecuta el archivo Python**: una vez configurada la base de datos, puedes ejecutar el archivo `InventarioConInterfaz.py` para iniciar la aplicación:
+   python InventarioConInterfaz.py
+
 ## Autor
 
 Matias Alvarez Veggia  
