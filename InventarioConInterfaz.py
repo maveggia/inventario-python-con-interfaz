@@ -89,14 +89,15 @@ class App:
         frame_botones = tk.Frame(root)
         frame_botones.grid(row=0, column=1, padx=20, pady=5, sticky="ne")
 
-        ttk.Button(frame_botones, text="Editar Stock", command=self.editar_stock).grid(row=0, column=0, padx=5, pady=5)
-        ttk.Button(frame_botones, text="Editar Precio", command=self.editar_precio).grid(row=0, column=1, padx=5, pady=5)
-        ttk.Button(frame_botones, text="Eliminar Producto", command=self.eliminar_producto).grid(row=0, column=2, padx=5, pady=5)
+        boton_ancho = 15
+        ttk.Button(frame_botones, text="Editar Stock", command=self.editar_stock, width=boton_ancho).grid(row=0, column=0, padx=5, pady=5)
+        ttk.Button(frame_botones, text="Editar Precio", command=self.editar_precio, width=boton_ancho).grid(row=0, column=1, padx=5, pady=5)
+        ttk.Button(frame_botones, text="Eliminar Producto", command=self.eliminar_producto, width=boton_ancho).grid(row=0, column=2, padx=5, pady=5)
 
         # Segunda fila de botones
-        ttk.Button(frame_botones, text="Buscar Producto", command=self.buscar_producto).grid(row=1, column=0, padx=5, pady=5)
-        ttk.Button(frame_botones, text="Reporte Bajo Stock", command=self.reporte_bajo_stock).grid(row=1, column=1, padx=5, pady=5)
-        ttk.Button(frame_botones, text="Vaciar Inventario", command=self.vaciar_inventario).grid(row=1, column=2, padx=5, pady=5)
+        ttk.Button(frame_botones, text="Buscar Producto", command=self.buscar_producto, width=boton_ancho).grid(row=1, column=0, padx=5, pady=5)
+        ttk.Button(frame_botones, text="Reporte Bajo Stock", command=self.reporte_bajo_stock, width=boton_ancho).grid(row=1, column=1, padx=5, pady=5)
+        ttk.Button(frame_botones, text="Vaciar Inventario", command=self.vaciar_inventario, width=boton_ancho).grid(row=1, column=2, padx=5, pady=5)
 
         # Tabla de inventario
         self.tree = ttk.Treeview(root, columns=("id", "nombre", "stock", "precio"), show="headings")
