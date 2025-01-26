@@ -1,24 +1,34 @@
-import sqlite3
+import mysql.connector
+from dotenv import load_dotenv
+import os
 import tkinter as tk
 from tkinter import messagebox, ttk, simpledialog
 
-# Conexión a la base de datos
-conexion = sqlite3.connect("inventario.db")
+load_dotenv()
+
+# Conexion a la base de datos
+conexion = mysql.connector.connect(
+    host=os.getenv("DB_HOST"), 
+    user=os.getenv("DB_USER"),  
+    password=os.getenv("DB_PASSWORD"),  
+    database=os.getenv("DB_NAME")  
+)
+
 cursor = conexion.cursor()
 
 # Creación de la tabla "productos"
 cursor.execute("""
-CREATE TABLE IF NOT EXISTS productos(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT NOT NULL,
-    stock INTEGER NOT NULL,
-    precio REAL NOT NULL
+CREATE TABLE IF NOT EXISTS productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    stock INT NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL
 )
 """)
 conexion.commit()
 
 def agregar_producto(nombre, stock, precio):
-    cursor.execute("INSERT INTO productos (nombre, stock, precio) VALUES (?, ?, ?)", (nombre, stock, precio))
+    cursor.execute("INSERT INTO productos (nombre, stock, precio) VALUES (%s, %s, %s)", (nombre, stock, precio))
     conexion.commit()
     messagebox.showinfo("Éxito", "Producto agregado con éxito")
 
@@ -27,15 +37,15 @@ def obtener_inventario():
     return cursor.fetchall()
 
 def editar_stock(id_producto, nuevo_stock):
-    cursor.execute("UPDATE productos SET stock = ? WHERE id = ?", (nuevo_stock, id_producto))
+    cursor.execute("UPDATE productos SET stock = %s WHERE id = %s", (nuevo_stock, id_producto))
     conexion.commit()
 
 def editar_precio(id_producto, nuevo_precio):
-    cursor.execute("UPDATE productos SET precio = ? WHERE id = ?", (nuevo_precio, id_producto))
+    cursor.execute("UPDATE productos SET precio = %s WHERE id = %s", (nuevo_precio, id_producto))
     conexion.commit()
 
 def eliminar_producto(id_producto):
-    cursor.execute("DELETE FROM productos WHERE id = ?", (id_producto,))
+    cursor.execute("DELETE FROM productos WHERE id = %s", (id_producto,))
     conexion.commit()
 
 def vaciar_inventario():
@@ -43,11 +53,11 @@ def vaciar_inventario():
     conexion.commit()
 
 def buscar_producto(nombre):
-    cursor.execute("SELECT * FROM productos WHERE nombre LIKE ?", (f"%{nombre}%",))
+    cursor.execute("SELECT * FROM productos WHERE nombre LIKE %s", (f"%{nombre}%",))
     return cursor.fetchall()
 
 def productos_bajo_stock(limite):
-    cursor.execute("SELECT * FROM productos WHERE stock <= ?", (limite,))
+    cursor.execute("SELECT * FROM productos WHERE stock <= %s", (limite,))
     return cursor.fetchall()
 
 # Crear interfaz gráfica con tkinter

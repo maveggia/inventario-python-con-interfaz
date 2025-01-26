@@ -1,6 +1,6 @@
 # Sistema de inventario en Python con interfaz gráfica
 
-Este es un sistema de gestión de inventario desarrollado en Python, utilizando una interfaz gráfica con Tkinter. El sistema se conecta a una base de datos SQLite para almacenar los productos.
+Este es un sistema de gestión de inventario desarrollado en Python, utilizando una interfaz gráfica con Tkinter. El sistema se conecta a una base de datos **MySQL** para almacenar los productos.
 
 ## Funcionalidades
 
@@ -15,7 +15,8 @@ Este es un sistema de gestión de inventario desarrollado en Python, utilizando 
 ## Requisitos
 
 - **Python 3.8 o superior**
-- **Biblioteca SQLite3** (incluida con Python)
+- **MySQL** (para la base de datos)
+- **Biblioteca mysql-connector-python** (para interactuar con MySQL)
 - **Tkinter** (incluida con Python)
 
 ## Autor
